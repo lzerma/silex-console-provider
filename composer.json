@@ -1,0 +1,26 @@
+{
+  "name" : "lzerma/silex-console-provider",
+  "description" : "For you can work with beauty console from Symfony in your Silex project.",
+  "type" : "library",
+  "authors" : [
+    {
+      "name" : "Lucas Zerma",
+      "email" : "lzerma@gmail.com",
+      "homepage" : "http://github.com/lzerma",
+      "role" : "Developer"
+    }
+  ],
+  "license" : "MIT",
+  "require" : {
+    "php" : ">=5.3",
+    "symfony/console" : "2.6.*@dev"
+  },
+  "version" : "1.0.0",
+  "minimum-stability" : "dev",
+  "autoload" : {
+    "psr-0" : {
+      "SilexConsole\\" : "src/"
+    }
+  }
+}
+
