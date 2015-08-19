@@ -1,9 +1,10 @@
 <?php
 namespace SilexConsole\Provider;
-
-use Pimple\ServiceProviderInterface;
-use Pimple\Container;
+use Silex\Application;
+use Silex\ServiceProviderInterface;
 use SilexConsole\Console\Application as ConsoleApplication;
+use SilexConsole\Console\ConsoleEvent;
+use SilexConsole\Console\ConsoleEvents;
 
 /**
  * Class ConsoleServiceProvider
@@ -13,15 +14,26 @@ use SilexConsole\Console\Application as ConsoleApplication;
 class ConsoleServiceProvider implements ServiceProviderInterface
 {
     /**
-     * @param Container $app
+     * @param Application $app
      */
-    public function register(Container $app)
+    public function register(Application $app)
     {
-        $app['console'] = function ($app) {
+        $app['console'] = $app->share(function() use ($app) {
             $application = new ConsoleApplication(
-                $app['console.name'], $app['console.version'], $app
+                $app,
+                $app['console.project_directory'],
+                $app['console.name'],
+                $app['console.version']
             );
+            $app['dispatcher']->dispatch(ConsoleEvents::INIT, new ConsoleEvent($application));
             return $application;
-        };
+        });
+    }
+
+    /**
+     * @param Application $app
+     */
+    public function boot(Application $app)
+    {
     }
 }

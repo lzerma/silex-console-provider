@@ -1,6 +1,5 @@
 <?php
 namespace SilexConsole\Console;
-
 use Silex\Application as SilexApplication;
 use Symfony\Component\Console\Application as ConsoleApplication;
 
@@ -9,30 +8,45 @@ use Symfony\Component\Console\Application as ConsoleApplication;
  *
  * @package SilexConsole\Console
  */
-class Application
+class Application extends ConsoleApplication
 {
+    /**
+     * @var SilexApplication
+     */
+    private $silexApplication;
+
     /**
      * @var
      */
-    private $app;
+    private $projectDirectory;
 
     /**
-     * @param $name
-     * @param $version
-     * @param $application
+     * @param SilexApplication $application
+     * @param                  $projectDirectory
+     * @param string           $name
+     * @param string           $version
      */
-    public function __construct($name, $version, $application)
+    public function __construct(SilexApplication $application, $projectDirectory, $name = 'UNKNOWN', $version = 'UNKNOWN')
     {
         parent::__construct($name, $version);
-        $this->app = $application;
+        $this->silexApplication = $application;
+        $this->projectDirectory = $projectDirectory;
         $application->boot();
+    }
+
+    /**
+     * @return SilexApplication
+     */
+    public function getSilexApplication()
+    {
+        return $this->silexApplication;
     }
 
     /**
      * @return mixed
      */
-    public function getApplication()
+    public function getProjectDirectory()
     {
-        return $this->app;
+        return $this->projectDirectory;
     }
 }
