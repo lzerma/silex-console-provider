@@ -1,23 +1,27 @@
 <?php
 namespace SilexConsole\Command;
-
-use Symfony\Component\Console\Command\Command as SymfonyCommand;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Command\Command as BaseCommand;
 
 /**
  * Class Command
  *
  * @package SilexConsole\Command
  */
-class Command extends SymfonyCommand {
+class Command extends BaseCommand
+{
+    /**
+     * @return mixed
+     */
+    public function getSilexApplication()
+    {
+        return $this->getApplication()->getSilexApplication();
+    }
 
     /**
-     * @return \Symfony\Component\Console\Application
+     * @return mixed
      */
-    public function getSilexApplication() {
-        return $this->getApplication();
+    public function getProjectDirectory()
+    {
+        return $this->getApplication()->getProjectDirectory();
     }
 }
