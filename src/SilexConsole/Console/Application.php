@@ -1,5 +1,6 @@
 <?php
 namespace SilexConsole\Console;
+
 use Silex\Application as SilexApplication;
 use Symfony\Component\Console\Application as ConsoleApplication;
 
@@ -26,8 +27,9 @@ class Application extends ConsoleApplication
      * @param string           $name
      * @param string           $version
      */
-    public function __construct(SilexApplication $application, $projectDirectory, $name = 'UNKNOWN', $version = 'UNKNOWN')
-    {
+    public function __construct(SilexApplication $application,
+        $projectDirectory, $name = 'UNKNOWN', $version = 'UNKNOWN'
+    ) {
         parent::__construct($name, $version);
         $this->silexApplication = $application;
         $this->projectDirectory = $projectDirectory;

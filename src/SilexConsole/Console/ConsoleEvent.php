@@ -1,5 +1,6 @@
 <?php
 namespace SilexConsole\Console;
+
 use Symfony\Component\EventDispatcher\Event;
 use SilexConsole\Console\Application;
 

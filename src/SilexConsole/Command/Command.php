@@ -1,5 +1,6 @@
 <?php
 namespace SilexConsole\Command;
+
 use Symfony\Component\Console\Command\Command as BaseCommand;
 
 /**
